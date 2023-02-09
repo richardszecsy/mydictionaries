@@ -36,19 +36,17 @@ import json
 infile = open('eq_data.json', 'r')
 data = json.load(infile)
 
-print('Number of earthquakes', data['metadata'],['count'])
+print('Number of earthquakes', data['metadata']['count'])
 #2--------------------------------------------
-temp_dict = {}
+newdict = {}
 eq_dict = {'earthquakes':[]}
 for row in range(len(data['features'])):
    if data['features'][row]['properties']['mag']>6:
-      temp_dict['location'] = data['features'][row]['properties']['place']
-      temp_dict['magnitude'] = data['features'][row]['properties']['mag']
-      temp_dict['longitude'] = data['features'][row]['geometry']['coordinates'][0]
-      temp_dict['latitude'] = data['features'][row]['geometry']['coordinates'][1]
-      
-      eq_dict['earthquakes'].append(temp_dict)
-      temp_dict = {}
+      newdict['location'] = data['features'][row]['properties']['place']
+      newdict['magnitude'] = data['features'][row]['properties']['mag']
+      newdict['longitude'] = data['features'][row]['geometry']['coordinates'][0]
+      newdict['latitude'] = data['features'][row]['geometry']['coordinates'][1]
+      eq_dict['earthquakes'].append(newdict)
 print()
 print(eq_dict['earthquakes'])
 #3------------------------------------------------
